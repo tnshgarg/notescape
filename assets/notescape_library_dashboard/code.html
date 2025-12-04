@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notescape Library Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings:
+        'FILL' 0,
+        'wght' 300,
+        'GRAD' 0,
+        'opsz' 20
+      }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "background": "hsl(0 0% 100%)",
+              "foreground": "hsl(0 0% 3.9%)",
+              "card": "hsl(0 0% 100%)",
+              "card-foreground": "hsl(0 0% 3.9%)",
+              "popover": "hsl(0 0% 100%)",
+              "popover-foreground": "hsl(0 0% 3.9%)",
+              "primary": "hsl(0 0% 9%)",
+              "primary-foreground": "hsl(0 0% 98%)",
+              "secondary": "hsl(0 0% 96.1%)",
+              "secondary-foreground": "hsl(0 0% 9%)",
+              "muted": "hsl(0 0% 96.1%)",
+              "muted-foreground": "hsl(0 0% 45.1%)",
+              "accent": "hsl(0 0% 96.1%)",
+              "accent-foreground": "hsl(0 0% 9%)",
+              "destructive": "hsl(0 84.2% 60.2%)",
+              "destructive-foreground": "hsl(0 0% 98%)",
+              "border": "hsl(0 0% 89.8%)",
+              "input": "hsl(0 0% 89.8%)",
+              "ring": "hsl(0 0% 3.9%)",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"lg": "0.5rem", "md": "calc(0.5rem - 2px)", "sm": "calc(0.5rem - 4px)"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="bg-background text-foreground font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="flex h-full w-full">
+<nav class="flex h-screen min-w-[240px] flex-col justify-between border-r border-border bg-background p-4">
+<div class="flex flex-col gap-4">
+<div class="flex items-center gap-3 p-2">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-md size-8" data-alt="Notescape application logo" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBysCTMnzIYe0UrBgRs3UpNDE5tE7ARxDMQ6ulyuMRlMZI-SehX9ehejGxl34O6YsKrawOg8IYL1WihvkgwufvFKcoU_o-OY0DFmgKx-6OARniYpj0kVJOX8XN4_Malru277JXuUSCJIl2yYWkkd4VHjaiCaBDSziNhMC2LiOKi_FRuwccXoYbut6fazDYWt4xE08-D_udOtvPXbDcSb10ca7YsHkEwvmeyuCgQ5VE2CIbR25_beU6SRFSV5kD5HbhwaVTvYE5Ss3i6");'></div>
+<div class="flex flex-col">
+<h1 class="text-foreground text-sm font-semibold leading-normal">Notescape</h1>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-md bg-secondary px-3 py-2 text-primary" href="#">
+<span class="material-symbols-outlined text-base">dashboard</span>
+<p class="text-sm font-medium leading-normal">Dashboard</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground" href="#">
+<span class="material-symbols-outlined text-base">auto_stories</span>
+<p class="text-sm font-medium leading-normal">Library</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground" href="#">
+<span class="material-symbols-outlined text-base">auto_awesome</span>
+<p class="text-sm font-medium leading-normal">Generate</p>
+</a>
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground" href="#">
+<span class="material-symbols-outlined text-base">settings</span>
+<p class="text-sm font-medium leading-normal">Settings</p>
+</a>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground" href="#">
+<span class="material-symbols-outlined text-base">account_circle</span>
+<p class="text-sm font-medium leading-normal">Profile</p>
+</a>
+</div>
+</nav>
+<main class="flex-1 bg-secondary/50">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border bg-background px-8 py-3">
+<div class="flex items-center gap-4 text-foreground">
+<h2 class="text-base font-semibold leading-tight">Dashboard</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<label class="relative flex w-full max-w-sm items-center">
+<span class="material-symbols-outlined absolute left-3 text-muted-foreground">search</span>
+<input class="form-input h-9 w-full rounded-md border border-input bg-background pl-10 pr-4 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50" placeholder="Search your notes, topics..." value=""/>
+</label>
+<button class="flex h-9 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-md bg-primary px-4 text-primary-foreground text-sm font-medium leading-normal shadow-sm hover:bg-primary/90">
+<span class="truncate">New Note</span>
+</button>
+</div>
+</header>
+<div class="p-8">
+<div class="grid grid-cols-3 gap-6">
+<div class="col-span-3 lg:col-span-2">
+<h1 class="text-foreground text-2xl font-bold leading-tight tracking-tight pb-4">Welcome back, Alex</h1>
+<div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+<div class="flex flex-col gap-1 rounded-lg border border-border bg-card p-4">
+<p class="text-muted-foreground text-sm font-medium leading-normal">Topics Learned</p>
+<p class="text-foreground text-2xl font-bold tracking-tight">14</p>
+</div>
+<div class="flex flex-col gap-1 rounded-lg border border-border bg-card p-4">
+<p class="text-muted-foreground text-sm font-medium leading-normal">Time Spent</p>
+<p class="text-foreground text-2xl font-bold tracking-tight">28h 45m</p>
+</div>
+<div class="flex flex-col gap-1 rounded-lg border border-border bg-card p-4">
+<p class="text-muted-foreground text-sm font-medium leading-normal">Completion Streak</p>
+<p class="text-foreground text-2xl font-bold tracking-tight">12 Days</p>
+</div>
+</div>
+<h2 class="text-foreground pt-6 pb-3 text-lg font-semibold leading-tight tracking-tight">Quick Actions</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<button class="flex items-center gap-4 rounded-lg border border-border bg-card p-4 text-left transition-colors hover:bg-accent hover:text-accent-foreground">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
+<span class="material-symbols-outlined text-xl">style</span>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-card-foreground">Generate Flashcards</p>
+<p class="text-sm text-muted-foreground">Turn notes into a study deck</p>
+</div>
+</button>
+<button class="flex items-center gap-4 rounded-lg border border-border bg-card p-4 text-left transition-colors hover:bg-accent hover:text-accent-foreground">
+<div class="flex size-10 shrink-0 items-center justify-center rounded-md border bg-background text-muted-foreground">
+<span class="material-symbols-outlined text-xl">compress</span>
+</div>
+<div class="flex flex-col">
+<p class="text-sm font-semibold text-card-foreground">Create Revision Capsule</p>
+<p class="text-sm text-muted-foreground">Summarize topics for review</p>
+</div>
+</button>
+</div>
+<h2 class="text-foreground pt-6 pb-3 text-lg font-semibold leading-tight tracking-tight">Recent Activity</h2>
+<div class="w-full overflow-hidden rounded-lg border border-border bg-card">
+<div class="overflow-x-auto">
+<table class="w-full text-sm">
+<thead class="bg-secondary/50">
+<tr class="border-b border-border">
+<th class="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">Note Title</th>
+<th class="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">Subject</th>
+<th class="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">Last Studied</th>
+<th class="h-10 px-4 text-left align-middle text-xs font-medium text-muted-foreground">Format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="border-b border-border transition-colors hover:bg-accent">
+<td class="p-4 font-medium text-foreground whitespace-nowrap">Quantum Entanglement Basics</td>
+<td class="p-4 text-muted-foreground">Physics</td>
+<td class="p-4 text-muted-foreground">Yesterday</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-full border border-blue-500/20 bg-blue-500/10 px-2 py-0.5 text-xs font-medium text-blue-700">Full Note</span>
+</td>
+</tr>
+<tr class="border-b border-border transition-colors hover:bg-accent">
+<td class="p-4 font-medium text-foreground whitespace-nowrap">The French Revolution Key Dates</td>
+<td class="p-4 text-muted-foreground">History</td>
+<td class="p-4 text-muted-foreground">2 days ago</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-full border border-purple-500/20 bg-purple-500/10 px-2 py-0.5 text-xs font-medium text-purple-700">Flashcards</span>
+</td>
+</tr>
+<tr class="transition-colors hover:bg-accent">
+<td class="p-4 font-medium text-foreground whitespace-nowrap">Cell Mitosis Explained</td>
+<td class="p-4 text-muted-foreground">Biology</td>
+<td class="p-4 text-muted-foreground">4 days ago</td>
+<td class="p-4">
+<span class="inline-flex items-center rounded-full border border-green-500/20 bg-green-500/10 px-2 py-0.5 text-xs font-medium text-green-700">Revision Note</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="col-span-3 lg:col-span-1">
+<div class="sticky top-8">
+<div class="rounded-lg border border-border bg-card p-4">
+<h3 class="text-base font-semibold text-card-foreground mb-4">Upcoming Deadlines</h3>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="flex size-9 shrink-0 flex-col items-center justify-center rounded-md border bg-background">
+<span class="text-[10px] font-medium uppercase text-red-600">OCT</span>
+<span class="text-sm font-bold text-foreground">28</span>
+</div>
+<div>
+<p class="text-sm font-medium text-foreground">Physics Midterm</p>
+<p class="text-xs text-muted-foreground">Chapters 4-7</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex size-9 shrink-0 flex-col items-center justify-center rounded-md border bg-background">
+<span class="text-[10px] font-medium uppercase text-yellow-600">NOV</span>
+<span class="text-sm font-bold text-foreground">05</span>
+</div>
+<div>
+<p class="text-sm font-medium text-foreground">History Essay Due</p>
+<p class="text-xs text-muted-foreground">Causes of the Revolution</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex size-9 shrink-0 flex-col items-center justify-center rounded-md border bg-background">
+<span class="text-[10px] font-medium uppercase text-muted-foreground">NOV</span>
+<span class="text-sm font-bold text-foreground">12</span>
+</div>
+<div>
+<p class="text-sm font-medium text-foreground">Biology Lab Report</p>
+<p class="text-xs text-muted-foreground">Mitosis Observation</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+
+</body></html>

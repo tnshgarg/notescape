@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notescape Notebook Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+    </style>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "background": "hsl(0 0% 100%)",
+              "foreground": "hsl(0 0% 3.9%)",
+              "card": "hsl(0 0% 100%)",
+              "card-foreground": "hsl(0 0% 3.9%)",
+              "popover": "hsl(0 0% 100%)",
+              "popover-foreground": "hsl(0 0% 3.9%)",
+              "primary": "hsl(0 0% 9%)",
+              "primary-foreground": "hsl(0 0% 98%)",
+              "secondary": "hsl(0 0% 96.1%)",
+              "secondary-foreground": "hsl(0 0% 9%)",
+              "muted": "hsl(0 0% 96.1%)",
+              "muted-foreground": "hsl(0 0% 45.1%)",
+              "accent": "hsl(0 0% 96.1%)",
+              "accent-foreground": "hsl(0 0% 9%)",
+              "destructive": "hsl(0 84.2% 60.2%)",
+              "destructive-foreground": "hsl(0 0% 98%)",
+              "border": "hsl(0 0% 89.8%)",
+              "input": "hsl(0 0% 89.8%)",
+              "ring": "hsl(0 0% 3.9%)",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+</head>
+<body class="font-display bg-background text-foreground">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="flex flex-1 justify-center py-5 sm:px-4 md:px-10 lg:px-20 xl:px-40">
+<div class="layout-content-container flex flex-col max-w-6xl flex-1">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border px-4 md:px-10 py-4">
+<div class="flex items-center gap-4 text-foreground">
+<div class="w-6 h-6 text-primary">
+<svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold tracking-[-0.015em]">Notescape</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center items-center gap-9">
+<a class="text-foreground text-sm font-medium leading-normal" href="#">Marketplace</a>
+<a class="text-muted-foreground text-sm font-medium leading-normal" href="#">My Library</a>
+<a class="text-muted-foreground text-sm font-medium leading-normal" href="#">Create</a>
+</nav>
+<div class="flex items-center gap-4">
+<div class="hidden md:block w-10 h-10 rounded-full bg-cover bg-center" data-alt="User avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuATVvRMF2ne7X3sMhbp4R_l6nv-4JvGJkEtgJ5sADeGDJYsvtokBsNqd7ETQF8kXfTcYpSaUJCcCcHyB2hjxU6ewbj_AFNa439S4VU9nMCIjPxpjtS5cSDhRD0IurJocDaMh_bgfD9MnquyNWb5tMG9rhvNLdWWaI-eWc8eu86Wv21HUbCtXZTXKEHxpmb6gUFGcV70GpjilljcDs4wywfiD3QrTcmw7pP6u6w1ox80ClV-yHo5wB6arYGm0q4oSwbFEJtX3Vlw7qho");'></div>
+<button class="md:hidden text-foreground">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex flex-col gap-8 p-4 md:p-8">
+<div class="flex flex-wrap justify-between items-center gap-4 py-8 text-center">
+<div class="flex w-full flex-col gap-3">
+<h1 class="text-foreground text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]">Notescape Notebook Marketplace</h1>
+<p class="text-muted-foreground text-base md:text-lg font-normal leading-normal max-w-3xl mx-auto">Explore a universe of knowledge, crafted by fellow learners and experts on Notescape.</p>
+</div>
+</div>
+<div class="px-4 py-3">
+<label class="flex flex-col min-w-40 h-14 w-full max-w-2xl mx-auto">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-card border border-input">
+<div class="text-muted-foreground flex items-center justify-center pl-4">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-foreground focus:outline-0 focus:ring-0 border-none bg-transparent h-full placeholder:text-muted-foreground px-4 text-base font-normal leading-normal" placeholder="Search by topic, author, or keyword..." value=""/>
+</div>
+</label>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-3 p-3">
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-md bg-secondary border border-border pl-3 pr-2 text-secondary-foreground">
+<p class="text-xs font-medium leading-normal">Sort: Trending</p>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-md bg-secondary border border-border pl-3 pr-2 text-secondary-foreground">
+<p class="text-xs font-medium leading-normal">Mode: All</p>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+<button class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-md bg-secondary border border-border pl-3 pr-2 text-secondary-foreground">
+<p class="text-xs font-medium leading-normal">Subject: All</p>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</button>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-4">
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by Dr. Evelyn Reed</p>
+<p>Oct 23, 2023</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">Quantum Mechanics Explained</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Physics</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Socrates</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>1.2k</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>124 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by Prof. Alistair Finch</p>
+<p>Sep 15, 2023</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">Advanced Calculus Mastery</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Mathematics</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Aristotle</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>980</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>210 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by Julian S.</p>
+<p>Nov 01, 2023</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">The Philosophy of Stoicism</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Philosophy</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Plato</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>2.4k</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>88 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by Anya Sharma</p>
+<p>Dec 05, 2023</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">A Deep Dive into AI Ethics</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">AI</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Ethics</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Socrates</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>850</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>150 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by Dr. Isabella Rossi</p>
+<p>Aug 29, 2023</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">Renaissance Art History</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Art History</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Aristotle</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>1.5k</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>175 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by Ben Carter</p>
+<p>Jul 12, 2023</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">Molecular Biology Fundamentals</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Biology</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Aristotle</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>760</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>198 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by DevGenius</p>
+<p>Jan 03, 2024</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">Python Algorithms &amp; Data Structures</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Programming</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Socrates</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>3.1k</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>250 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+<div class="flex flex-col gap-3 p-4 rounded-lg bg-card border border-border transition-shadow duration-300">
+<div class="flex items-center justify-between text-xs text-muted-foreground">
+<p>by The Historian</p>
+<p>Feb 11, 2024</p>
+</div>
+<p class="text-card-foreground text-sm font-semibold leading-snug">Chronicles of World History</p>
+<div class="flex flex-wrap gap-1.5">
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">History</span>
+<span class="px-2 py-0.5 text-xs rounded-full bg-secondary text-secondary-foreground">Plato</span>
+</div>
+<div class="flex items-center justify-between text-xs text-muted-foreground mt-2 pt-2 border-t border-border">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">thumb_up</span>
+<span>1.8k</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined !text-sm">description</span>
+<span>312 Notes</span>
+</div>
+</div>
+<button class="mt-2 w-full h-9 rounded-md bg-primary text-primary-foreground text-xs font-medium">View Notebook</button>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

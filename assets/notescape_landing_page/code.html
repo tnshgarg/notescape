@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notescape Landing Page</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#111827",
+              "primary-foreground": "#FFFFFF",
+              "secondary": "#F3F4F6",
+              "secondary-foreground": "#111827",
+              "muted": "#F3F4F6",
+              "muted-foreground": "#6B7280",
+              "accent": "#F3F4F6",
+              "accent-foreground": "#111827",
+              "destructive": "#EF4444",
+              "border": "#E5E7EB",
+              "input": "#E5E7EB",
+              "ring": "#111827",
+              "background": "#FFFFFF",
+              "foreground": "#111827",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {
+              "lg": "0.5rem",
+              "md": "calc(0.5rem - 2px)",
+              "sm": "calc(0.5rem - 4px)"
+            },
+            boxShadow: {
+              "input": "0 0 0 2px #FFFFFF, 0 0 0 4px #E5E7EB, 0 1px 2px 0 rgb(0 0 0 / 0.05)"
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 300,
+            'GRAD' 0,
+            'opsz' 20
+        }
+    </style>
+</head>
+<body class="font-display bg-background text-foreground antialiased">
+<div class="relative flex min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-20 xl:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col w-full max-w-5xl flex-1">
+<header class="flex items-center justify-between whitespace-nowrap py-4">
+<div class="flex items-center gap-3 text-foreground">
+<div class="size-5">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
+</svg>
+</div>
+<h2 class="text-foreground text-lg font-bold leading-tight tracking-[-0.015em]">Notescape</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center items-center gap-6">
+<a class="text-muted-foreground hover:text-foreground text-sm font-medium" href="#">Features</a>
+<a class="text-muted-foreground hover:text-foreground text-sm font-medium" href="#">Showcase</a>
+<a class="text-muted-foreground hover:text-foreground text-sm font-medium" href="#">Pricing</a>
+</nav>
+<div class="hidden md:flex items-center gap-2">
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-9 px-4 bg-secondary text-secondary-foreground text-sm font-medium hover:bg-accent">
+<span class="truncate">Log In</span>
+</button>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-9 px-4 bg-primary text-primary-foreground text-sm font-medium">
+<span class="truncate">Sign Up</span>
+</button>
+</div>
+<div class="md:hidden">
+<button class="text-foreground">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<main class="flex flex-col gap-20 md:gap-28 lg:gap-32 py-16 md:py-24">
+<section class="flex flex-col items-center gap-8 text-center">
+<div class="flex flex-col gap-4 max-w-3xl">
+<h1 class="text-foreground text-4xl font-bold leading-tight tracking-tighter md:text-5xl">
+                                            Turn Any Content Into Actionable Knowledge
+                                        </h1>
+<p class="text-muted-foreground text-base md:text-lg">
+                                            Notescape uses AI to generate intelligent notes from any source. Upload a file, paste a link, or start a conversation and watch your learning transform.
+                                        </p>
+</div>
+<div class="flex flex-col sm:flex-row items-center gap-4">
+<button class="flex w-full sm:w-auto min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-10 px-5 bg-primary text-primary-foreground text-base font-medium">
+<span class="truncate">Get Started Free</span>
+</button>
+<button class="flex w-full sm:w-auto min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-md h-10 px-5 border border-input bg-background text-foreground text-base font-medium hover:bg-accent gap-2">
+<span class="material-symbols-outlined !text-xl">play_circle</span>
+<span class="truncate">Watch Demo</span>
+</button>
+</div>
+</section>
+<section class="flex flex-col gap-10 items-center">
+<div class="flex flex-col items-center text-center gap-3">
+<h2 class="text-foreground text-3xl font-bold tracking-tighter">An Interactive Learning Experience</h2>
+<p class="text-muted-foreground max-w-xl">
+                                See how Notescape seamlessly transforms raw information into structured wisdom, tailored to your preferred style of thinking.
+                            </p>
+</div>
+<div class="w-full max-w-5xl rounded-lg border border-border bg-muted/40 p-4 shadow-sm">
+<div class="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-4">
+<div class="flex flex-col gap-4">
+<div class="rounded-md border border-border bg-background p-4 flex flex-col items-center justify-center text-center gap-3 h-48">
+<div class="flex items-center justify-center size-10 rounded-full bg-secondary">
+<span class="material-symbols-outlined text-muted-foreground !text-2xl">upload_file</span>
+</div>
+<h3 class="font-semibold text-foreground">Upload Your Content</h3>
+<p class="text-sm text-muted-foreground">Drag &amp; drop a PDF, paste a URL, or simply start typing.</p>
+</div>
+<div class="rounded-md border border-border bg-background p-4">
+<h3 class="font-semibold text-foreground mb-3">Choose Your Mode</h3>
+<div class="flex flex-col gap-2">
+<button class="w-full flex items-center justify-start gap-3 p-2 rounded-md bg-secondary text-left">
+<span class="font-bold text-sm text-secondary-foreground">Socrates</span>
+<span class="text-xs text-muted-foreground">Question-driven</span>
+</button>
+<button class="w-full flex items-center justify-start gap-3 p-2 rounded-md hover:bg-secondary text-left">
+<span class="font-bold text-sm text-secondary-foreground">Aristotle</span>
+<span class="text-xs text-muted-foreground">Logical summaries</span>
+</button>
+<button class="w-full flex items-center justify-start gap-3 p-2 rounded-md hover:bg-secondary text-left">
+<span class="font-bold text-sm text-secondary-foreground">Plato</span>
+<span class="text-xs text-muted-foreground">Conceptual maps</span>
+</button>
+</div>
+</div>
+</div>
+<div class="flex flex-col rounded-lg border border-border bg-background p-4 min-h-[400px]">
+<div class="flex-grow flex flex-col gap-4">
+<div class="flex items-start gap-3">
+<div class="size-8 rounded-full bg-secondary flex items-center justify-center font-bold text-sm">AI</div>
+<div class="flex flex-col gap-2 bg-secondary p-3 rounded-lg rounded-tl-none">
+<p class="text-sm font-semibold text-secondary-foreground">Welcome to Socrates Mode.</p>
+<p class="text-sm text-muted-foreground">Based on your document about Photosynthesis, what is the central question you'd like to explore first?</p>
+</div>
+</div>
+<div class="flex items-start gap-3 justify-end">
+<div class="flex flex-col gap-2 bg-primary p-3 rounded-lg rounded-br-none max-w-xs">
+<p class="text-sm text-primary-foreground">What is the role of chlorophyll?</p>
+</div>
+<div class="size-8 rounded-full bg-muted flex items-center justify-center font-bold text-sm">You</div>
+</div>
+<div class="flex items-start gap-3">
+<div class="size-8 rounded-full bg-secondary flex items-center justify-center font-bold text-sm">AI</div>
+<div class="flex flex-col gap-2 bg-secondary p-3 rounded-lg rounded-tl-none">
+<p class="text-sm text-muted-foreground">Excellent question. Why do you think most plants are green? Does the color itself have a function?</p>
+</div>
+</div>
+</div>
+<div class="mt-4 flex items-center gap-2">
+<input class="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1" placeholder="Ask a follow-up question..." value=""/>
+<button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 w-10 bg-primary text-primary-foreground hover:bg-primary/90">
+<span class="material-symbols-outlined !text-xl">arrow_upward</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="px-4 py-10 text-center flex flex-col items-center gap-8">
+<div class="flex flex-col gap-3">
+<h2 class="text-foreground text-3xl font-bold tracking-tighter">Trusted by the Brightest Minds</h2>
+<p class="text-muted-foreground max-w-2xl mx-auto">See what students and researchers are saying about how Notescape has transformed their learning process.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl">
+<div class="bg-background p-6 rounded-lg border border-border text-left flex flex-col">
+<p class="text-muted-foreground mb-4 italic flex-grow">"Notescape's Socratic mode completely changed how I approach my research papers. It forces me to think critically and uncover insights I would have otherwise missed."</p>
+<div class="flex items-center gap-3 pt-4 border-t border-border">
+<div class="size-10 rounded-full bg-secondary flex-shrink-0"></div>
+<div>
+<p class="font-semibold text-foreground">Dr. Elena Vance</p>
+<p class="text-sm text-muted-foreground">Postdoctoral Fellow, MIT</p>
+</div>
+</div>
+</div>
+<div class="bg-background p-6 rounded-lg border border-border text-left flex flex-col">
+<p class="text-muted-foreground mb-4 italic flex-grow">"As a PhD candidate, my reading list is endless. The Aristotle mode's logical summaries are a lifesaver. It's like having a brilliant research assistant."</p>
+<div class="flex items-center gap-3 pt-4 border-t border-border">
+<div class="size-10 rounded-full bg-secondary flex-shrink-0"></div>
+<div>
+<p class="font-semibold text-foreground">Samuel Chen</p>
+<p class="text-sm text-muted-foreground">PhD Candidate, Stanford University</p>
+</div>
+</div>
+</div>
+<div class="bg-background p-6 rounded-lg border border-border text-left flex flex-col">
+<p class="text-muted-foreground mb-4 italic flex-grow">"The Plato mode is incredible for brainstorming. Visualizing connections between complex theories helps me structure my arguments and see the bigger picture."</p>
+<div class="flex items-center gap-3 pt-4 border-t border-border">
+<div class="size-10 rounded-full bg-secondary flex-shrink-0"></div>
+<div>
+<p class="font-semibold text-foreground">Aisha Khan</p>
+<p class="text-sm text-muted-foreground">Masters Student, Oxford University</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="mt-10 md:mt-20 border-t border-border pt-8 pb-4">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6 px-4">
+<div class="flex items-center gap-3 text-foreground">
+<div class="size-5">
+<svg fill="currentColor" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z"></path>
+</svg>
+</div>
+<h2 class="text-foreground text-base font-bold">Notescape</h2>
+</div>
+<div class="flex gap-6 text-muted-foreground text-sm">
+<a class="hover:text-foreground" href="#">Terms</a>
+<a class="hover:text-foreground" href="#">Privacy</a>
+<a class="hover:text-foreground" href="#">Contact</a>
+</div>
+<p class="text-sm text-muted-foreground">© 2024 Notescape. All rights reserved.</p>
+</div>
+</footer>
+</div>
+</div>
+</div>
+</div>
+
+</body></html>

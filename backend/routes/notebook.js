@@ -184,7 +184,7 @@ router.delete('/:id/sources/:sourceId', async (req, res) => {
 // Get all public notebooks (for Marketplace)
 router.get('/public/all', async (req, res) => {
   try {
-    const { category, search, limit = 20 } = req.query;
+    const { category, search, sortBy = 'popular', limit = 20 } = req.query;
     
     let query = { isPublic: true };
     
@@ -199,10 +199,16 @@ router.get('/public/all', async (req, res) => {
       ];
     }
 
+    // Sort options
+    let sortOption = { likes: -1, createdAt: -1 }; // Default: popular first
+    if (sortBy === 'recent') {
+      sortOption = { createdAt: -1 };
+    }
+
     const notebooks = await Notebook.find(query)
-      .sort({ likes: -1, createdAt: -1 })
+      .sort(sortOption)
       .limit(parseInt(limit))
-      .select('-sources.content'); // Exclude large content
+      .select('-sources.content -sources.pdfData'); // Exclude large content
     
     res.json({ success: true, notebooks });
   } catch (err) {
@@ -360,8 +366,10 @@ Return ONLY a valid JSON array with this exact structure (no markdown, no explan
 Rules:
 - Identify logical content breaks (chapter headings, major topic changes)
 - Exclude or give low relevance to: blank pages, table of contents, index, references, acknowledgments
-- Each chapter should be a meaningful unit of content (not too short, not too long)
-- If no clear chapters exist, divide by logical topic boundaries
+- **CRITICAL**: Each chapter MUST have meaningful content. Do NOT create chapters for single pages unless they are very dense.
+- **CRITICAL**: Merge adjacent short sections into larger logical chapters. A chapter should ideally span at least 3-5 pages unless it's a major topic change.
+- If a section is too short (e.g., < 500 words), merge it with the previous or next section.
+- If no clear chapters exist, divide by logical topic boundaries, ensuring each part is substantial.
 
 PDF Content:
 ${source.content.substring(0, 50000)}`;

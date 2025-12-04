@@ -26,13 +26,13 @@ const ApiKeyDialog = ({ open, onOpenChange }: ApiKeyDialogProps) => {
     setIsValidating(true);
 
     try {
-      const isValid = await validateApiKey(inputValue.trim());
+      const { isValid, error: validationError } = await validateApiKey(inputValue.trim());
       
       if (isValid) {
         setApiKey(inputValue.trim());
         onOpenChange(false);
       } else {
-        setError('Invalid API key. Please check and try again.');
+        setError(validationError || 'Invalid API key. Please check and try again.');
       }
     } catch (err) {
       setError('Failed to validate API key. Please try again.');

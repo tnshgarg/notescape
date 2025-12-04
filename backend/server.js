@@ -43,9 +43,14 @@ mongoose.connection.on('disconnected', () => {
 const aiRoutes = require('./routes/ai');
 const notebookRoutes = require('./routes/notebook');
 const filesRoutes = require('./routes/files');
+const statsRoutes = require('./routes/stats');
+const flashcardsRoutes = require('./routes/flashcards');
+
 app.use('/api/ai', aiRoutes);
 app.use('/api/notebooks', notebookRoutes);
 app.use('/api/files', filesRoutes);
+app.use('/api/stats', statsRoutes);
+app.use('/api/flashcards', flashcardsRoutes);
 
 // Routes Placeholder
 app.get('/', (req, res) => {

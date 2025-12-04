@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Tabs, TabsContent } from './ui/tabs';
 import { Button } from './ui/button';
-import { Loader2, Sparkles, RefreshCw, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Loader2, Sparkles, RefreshCw, ChevronLeft, ChevronRight, Brain, BookOpen, GraduationCap } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { generateNotes } from '@/lib/ai';
@@ -19,18 +19,24 @@ interface NoteViewerProps {
 
 type Mode = 'socrates' | 'aristotle' | 'plato';
 
-const modeDescriptions: Record<Mode, { title: string; description: string }> = {
+const modeDescriptions: Record<Mode, { title: string; description: string; icon: any; color: string }> = {
   socrates: {
-    title: 'Socrates Mode',
-    description: 'Easy explanations with diagrams, examples, and step-by-step breakdowns'
+    title: 'Socrates',
+    description: 'Simple explanations & examples',
+    icon: Sparkles,
+    color: 'text-violet-500'
   },
   aristotle: {
-    title: 'Aristotle Mode', 
-    description: 'In-depth research, complex equations, and academic references'
+    title: 'Aristotle', 
+    description: 'Deep dive & detailed analysis',
+    icon: Loader2, // Using Loader2 as placeholder, ideally use Microscope or similar if available
+    color: 'text-emerald-500'
   },
   plato: {
-    title: 'Plato Mode',
-    description: 'Exam-focused notes with key concepts, mnemonics, and practice questions'
+    title: 'Plato',
+    description: 'Key concepts & exam prep',
+    icon: Brain, // Using Brain as placeholder for "Idea/Form"
+    color: 'text-amber-500'
   }
 };
 
@@ -106,36 +112,63 @@ const NoteViewer = ({ notebook, sources, onNotebookUpdate, selectedChapter, onNa
         onValueChange={(v) => setActiveMode(v as Mode)} 
         className="flex-1 flex flex-col min-h-0"
       >
-        <div className="border-b px-4 py-2 flex items-center justify-between flex-shrink-0">
-          <TabsList className="grid w-[300px] grid-cols-3">
-            <TabsTrigger value="socrates">Socrates</TabsTrigger>
-            <TabsTrigger value="aristotle">Aristotle</TabsTrigger>
-            <TabsTrigger value="plato">Plato</TabsTrigger>
-          </TabsList>
-          
-          <Button 
-            onClick={handleGenerate} 
-            disabled={isGenerating || !apiKey || !selectedChapter}
-            size="sm"
-            className="gap-2"
-          >
-            {isGenerating ? (
-              <>
-                <Loader2 className="h-4 w-4 animate-spin" />
-                Generating...
-              </>
-            ) : hasContent ? (
-              <>
-                <RefreshCw className="h-4 w-4" />
-                Regenerate
-              </>
-            ) : (
-              <>
-                <Sparkles className="h-4 w-4" />
-                Generate Notes
-              </>
-            )}
-          </Button>
+        <div className="border-b px-4 py-3 flex-shrink-0 space-y-3 bg-muted/5">
+          {/* Mode Selection - Compact & Premium */}
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex bg-muted/50 p-1 rounded-lg border shadow-sm">
+              {(['socrates', 'aristotle', 'plato'] as Mode[]).map((mode) => {
+                const isActive = activeMode === mode;
+                const Info = modeDescriptions[mode];
+                const Icon = mode === 'socrates' ? Sparkles : (mode === 'aristotle' ? BookOpen : GraduationCap);
+                
+                return (
+                  <button
+                    key={mode}
+                    onClick={() => setActiveMode(mode)}
+                    className={`
+                      flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200
+                      ${isActive 
+                        ? 'bg-background text-foreground shadow-sm ring-1 ring-black/5 dark:ring-white/10' 
+                        : 'text-muted-foreground hover:text-foreground hover:bg-background/50'
+                      }
+                    `}
+                  >
+                    <Icon className={`h-3.5 w-3.5 ${isActive ? Info.color : ''}`} />
+                    {Info.title}
+                  </button>
+                );
+              })}
+            </div>
+
+            <Button 
+              onClick={handleGenerate} 
+              disabled={isGenerating || !apiKey || !selectedChapter}
+              size="sm"
+              className="h-8 px-3 gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm"
+            >
+              {isGenerating ? (
+                <>
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                  <span className="sr-only sm:not-sr-only sm:inline-block">Generating...</span>
+                </>
+              ) : hasContent ? (
+                <>
+                  <RefreshCw className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:inline-block">Regenerate</span>
+                </>
+              ) : (
+                <>
+                  <Sparkles className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:inline-block">Generate</span>
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Description - Subtle */}
+          <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-medium pl-1">
+            {modeDescriptions[activeMode].description}
+          </div>
         </div>
 
         {/* Scrollable Content Area */}

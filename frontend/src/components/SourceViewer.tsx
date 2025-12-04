@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Badge } from './ui/badge';
 import { FileText, Share2, MoreVertical, ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { Button } from './ui/button';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import type { Source, Chapter } from '@/lib/notebookApi';
+import { API_BASE_URL } from '@/lib/files';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
@@ -20,13 +21,33 @@ interface SourceViewerProps {
   selectedIndex?: number;
   onSelectSource?: (index: number) => void;
   selectedChapter?: Chapter | null;
+  onOrientationChange?: (isLandscape: boolean) => void;
 }
 
-const SourceViewer = ({ sources, selectedIndex = 0, onSelectSource, selectedChapter }: SourceViewerProps) => {
+const SourceViewer = ({ sources, selectedIndex = 0, onSelectSource, selectedChapter, onOrientationChange }: SourceViewerProps) => {
   const [currentIndex, setCurrentIndex] = useState(selectedIndex);
   const [numPages, setNumPages] = useState<number | null>(null);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [scale, setScale] = useState<number>(1.0);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [initialScaleSet, setInitialScaleSet] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const resizeObserver = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect) {
+          // Subtract padding (32px for p-4) and a bit for scrollbar
+          setContainerWidth(entry.contentRect.width - 48);
+        }
+      }
+    });
+
+    resizeObserver.observe(containerRef.current);
+    return () => resizeObserver.disconnect();
+  }, []);
   
   const currentSource = sources[currentIndex];
   const hasMultipleSources = sources.length > 1;
@@ -38,6 +59,7 @@ const SourceViewer = ({ sources, selectedIndex = 0, onSelectSource, selectedChap
 
   useEffect(() => {
     setCurrentIndex(selectedIndex);
+    setInitialScaleSet(false); // Reset initial scale flag when source changes
   }, [selectedIndex]);
 
   // Reset page number when chapter or source changes
@@ -51,6 +73,23 @@ const SourceViewer = ({ sources, selectedIndex = 0, onSelectSource, selectedChap
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
+  };
+
+  const onPageLoadSuccess = (page: any) => {
+    const isLandscape = page.originalWidth > page.originalHeight;
+    if (onOrientationChange) {
+      onOrientationChange(isLandscape);
+    }
+    
+    // Initial fit-to-width
+    if (!initialScaleSet && containerWidth > 0) {
+      // Calculate scale to fit width with some padding
+      const fitScale = (containerWidth - 48) / page.originalWidth;
+      if (fitScale > 0) {
+        setScale(fitScale);
+        setInitialScaleSet(true);
+      }
+    }
   };
 
   const handlePrev = () => {
@@ -180,7 +219,7 @@ const SourceViewer = ({ sources, selectedIndex = 0, onSelectSource, selectedChap
       )}
 
       {/* Content - Scrollable */}
-      <div className="flex-1 overflow-y-auto min-h-0 bg-muted/10 relative">
+      <div className="flex-1 overflow-y-auto min-h-0 bg-muted/10 relative" ref={containerRef}>
         {isPdf && currentSource?.content ? (
           <div className="flex flex-col items-center p-4 min-h-full">
             {/* PDF Navigation Overlay */}
@@ -210,9 +249,9 @@ const SourceViewer = ({ sources, selectedIndex = 0, onSelectSource, selectedChap
 
             {/* PDF Document */}
             <div className="shadow-lg">
-              {currentSource.pdfData ? (
+              {(currentSource.fileId || currentSource.pdfData) ? (
                 <Document
-                  file={currentSource.pdfData}
+                  file={currentSource.fileId ? `${API_BASE_URL}/api/files/${currentSource.fileId}` : currentSource.pdfData}
                   onLoadSuccess={onDocumentLoadSuccess}
                   loading={
                     <div className="flex items-center justify-center h-[600px] w-[400px] bg-white">
@@ -228,11 +267,11 @@ const SourceViewer = ({ sources, selectedIndex = 0, onSelectSource, selectedChap
                 >
                   <Page 
                     pageNumber={pageNumber} 
-                    scale={scale} 
+                    scale={scale}
                     renderTextLayer={false}
                     renderAnnotationLayer={false}
                     className="bg-white"
-                    width={Math.min(800, window.innerWidth * 0.4)}
+                    onLoadSuccess={onPageLoadSuccess}
                   />
                 </Document>
               ) : (

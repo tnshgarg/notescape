@@ -41,7 +41,28 @@ export const mockFileSystem: FileNode[] = [
 export const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
 
 /**
- * Extract text from a PDF file
+ * Upload file to backend (GridFS) and get extracted text
+ */
+export const uploadFile = async (file: File): Promise<{ fileId: string; text: string; pageCount: number }> => {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await fetch(`${API_BASE_URL}/api/files/upload`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error || 'Failed to upload file');
+  }
+
+  const data = await response.json();
+  return { fileId: data.fileId, text: data.text, pageCount: data.pageCount };
+};
+
+/**
+ * Extract text from a PDF file (Legacy, use uploadFile instead)
  */
 export const extractPdfText = async (file: File): Promise<{ text: string; pageCount: number; pdfData: string }> => {
   const formData = new FormData();

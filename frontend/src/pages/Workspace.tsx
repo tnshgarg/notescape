@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@/components/ui/resizable";
 import { Button } from '@/components/ui/button';
@@ -30,6 +30,15 @@ const Workspace = () => {
   const [selectedChapter, setSelectedChapter] = useState<Chapter | null>(null);
   const [copied, setCopied] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  
+  // Track if we've already auto-adjusted for the current source's orientation
+  // This prevents locking the user into a view if they want to change it back
+  const hasAdjustedForOrientation = useRef(false);
+
+  // Reset adjustment flag when source changes
+  useEffect(() => {
+    hasAdjustedForOrientation.current = false;
+  }, [selectedSourceIndex, notebook?._id]);
 
   useEffect(() => {
     if (!hasApiKey()) {
@@ -139,6 +148,18 @@ const Workspace = () => {
     } catch (error) {
       console.error('Failed to process chapters:', error);
       // Show error toast/alert
+    }
+  };
+
+  const handleOrientationChange = (isLandscape: boolean) => {
+    // Only adjust once per source to allow user override
+    if (isLandscape && !hasAdjustedForOrientation.current) {
+      // For landscape documents, maximize space by closing sidebars
+      // But keep the notes visible (Split View) as that's the core product
+      setSidebarCollapsed(true);
+      setShowAIPanel(false);
+      setViewMode('split');
+      hasAdjustedForOrientation.current = true;
     }
   };
 
@@ -360,6 +381,7 @@ const Workspace = () => {
                     selectedIndex={selectedSourceIndex}
                     onSelectSource={setSelectedSourceIndex}
                     selectedChapter={selectedChapter}
+                    onOrientationChange={handleOrientationChange}
                   />
                 </ResizablePanel>
                 
@@ -385,6 +407,7 @@ const Workspace = () => {
                   selectedIndex={selectedSourceIndex}
                   onSelectSource={setSelectedSourceIndex}
                   selectedChapter={selectedChapter}
+                  onOrientationChange={handleOrientationChange}
                 />
               </div>
             )}

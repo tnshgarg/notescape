@@ -62,5 +62,5 @@ export const useNotebooks = (userId: string) => {
     fetchNotebooks();
   };
 
-  return { notebooks, loading, error, refresh };
+  return { notebooks, loading, error, refresh, setNotebooks };
 };

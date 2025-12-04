@@ -8,7 +8,6 @@ export const useApiKey = () => {
   const [apiKey, setApiKeyState] = useState<string | null>(() => {
     return localStorage.getItem('gemini_api_key');
   });
-  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     // Sync with localStorage in case it changes in another tab
@@ -17,17 +16,24 @@ export const useApiKey = () => {
     };
     
     window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
+    window.addEventListener('local-storage-update', handleStorageChange);
+    
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+      window.removeEventListener('local-storage-update', handleStorageChange);
+    };
   }, []);
 
   const setApiKey = (key: string) => {
     localStorage.setItem('gemini_api_key', key);
     setApiKeyState(key);
+    window.dispatchEvent(new Event('local-storage-update'));
   };
 
   const clearApiKey = () => {
     localStorage.removeItem('gemini_api_key');
     setApiKeyState(null);
+    window.dispatchEvent(new Event('local-storage-update'));
   };
 
   const hasApiKey = (): boolean => {
@@ -39,6 +45,5 @@ export const useApiKey = () => {
     setApiKey,
     clearApiKey,
     hasApiKey,
-    isLoading
   };
 };

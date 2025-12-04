@@ -18,6 +18,7 @@ export interface Source {
   filename: string;
   type: 'pdf' | 'text' | 'markdown' | 'url' | 'youtube';
   content?: string;
+  fileId?: string; // Reference to GridFS file
   pdfData?: string; // Base64-encoded PDF for rendering
   url?: string;
   uploadedAt?: Date;
@@ -176,11 +177,13 @@ export const removeSource = async (
 export const getPublicNotebooks = async (options?: {
   category?: string;
   search?: string;
+  sortBy?: 'popular' | 'recent';
   limit?: number;
 }): Promise<Notebook[]> => {
   const params = new URLSearchParams();
   if (options?.category) params.append('category', options.category);
   if (options?.search) params.append('search', options.search);
+  if (options?.sortBy) params.append('sortBy', options.sortBy);
   if (options?.limit) params.append('limit', options.limit.toString());
   
   const response = await fetch(`${API_BASE_URL}/api/notebooks/public/all?${params}`);

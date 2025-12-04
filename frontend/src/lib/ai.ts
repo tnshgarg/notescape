@@ -111,7 +111,7 @@ export const chatWithAI = async (params: ChatParams): Promise<ChatResponse> => {
 /**
  * Validate API key by making a lightweight request
  */
-export const validateApiKey = async (apiKey: string): Promise<boolean> => {
+export const validateApiKey = async (apiKey: string): Promise<{ isValid: boolean; error?: string }> => {
   try {
     // Use chat endpoint for a lightweight check
     const response = await fetch(`${API_BASE_URL}/api/ai/chat`, {
@@ -126,30 +126,29 @@ export const validateApiKey = async (apiKey: string): Promise<boolean> => {
     });
 
     if (response.ok) {
-      return true;
+      return { isValid: true };
     }
+
+    const data = await response.json().catch(() => ({}));
 
     // If 401 or 403, key is definitely invalid
     if (response.status === 401 || response.status === 403) {
-      return false;
-    }
-
-    // For other errors (quota, server error), we might want to assume valid or throw
-    // But for validation purposes, let's check the error message
-    const data = await response.json().catch(() => ({}));
-    if (data.error && (data.error.includes('API key') || data.error.includes('unauthorized'))) {
-      return false;
+      return { isValid: false, error: 'Invalid API key. Please check your key.' };
     }
 
     // If it's a quota error, the key is valid but exhausted
     if (data.error && (data.error.includes('quota') || data.error.includes('rate limit'))) {
-      return true;
+      return { isValid: true }; // Treat as valid key, just exhausted
     }
 
-    // Default to false for other unknown errors during validation
-    return false;
-  } catch (error) {
+    // For other errors (e.g. 404 model not found, 500 server error), return the specific error
+    return { 
+      isValid: false, 
+      error: data.error || data.details || `Validation failed (${response.status})` 
+    };
+
+  } catch (error: any) {
     console.error('API Key validation error:', error);
-    return false;
+    return { isValid: false, error: error.message || 'Network error during validation' };
   }
 };

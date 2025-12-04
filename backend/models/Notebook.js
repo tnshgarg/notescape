@@ -19,7 +19,8 @@ const sourceSchema = new mongoose.Schema({
   filename: { type: String, required: true },
   type: { type: String, enum: ['pdf', 'text', 'markdown', 'url', 'youtube'], required: true },
   content: { type: String }, // For text/markdown, or extracted PDF text
-  pdfData: { type: String }, // Base64-encoded PDF binary for rendering
+  fileId: { type: mongoose.Schema.Types.ObjectId }, // Reference to GridFS file
+  pdfData: { type: String }, // Legacy: Base64-encoded PDF binary
   url: { type: String }, // For URL/YouTube sources
   uploadedAt: { type: Date, default: Date.now },
   size: { type: Number }, // File size in bytes

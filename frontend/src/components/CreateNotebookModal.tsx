@@ -8,7 +8,7 @@ import { Textarea } from './ui/textarea';
 import { Label } from './ui/label';
 import { Upload, FileText, X, Loader2, AlertCircle } from 'lucide-react';
 import { createNotebook, type Source } from '@/lib/notebookApi';
-import { extractPdfText, readTextFile } from '@/lib/files';
+import { uploadFile, readTextFile } from '@/lib/files';
 
 interface CreateNotebookModalProps {
   open: boolean;
@@ -38,14 +38,15 @@ const CreateNotebookModal = ({ open, onOpenChange }: CreateNotebookModalProps) =
       try {
         let content = '';
         let pageCount: number | undefined;
+        let fileId: string | undefined;
         let pdfData: string | undefined;
 
         if (file.name.endsWith('.pdf')) {
-          // Use backend API to extract PDF text
-          const result = await extractPdfText(file);
+          // Upload to GridFS and get text
+          const result = await uploadFile(file);
           content = result.text;
           pageCount = result.pageCount;
-          pdfData = result.pdfData; // Store the base64 PDF for rendering
+          fileId = result.fileId;
           
           if (!content || content.trim().length === 0) {
             throw new Error('Could not extract text from PDF. The PDF might be image-based or encrypted.');
@@ -60,7 +61,8 @@ const CreateNotebookModal = ({ open, onOpenChange }: CreateNotebookModalProps) =
           type: file.name.endsWith('.pdf') ? 'pdf' : 
                 file.name.endsWith('.md') ? 'markdown' : 'text',
           content,
-          pdfData, // Include PDF binary data for rendering
+          fileId, // Reference to GridFS file
+          pdfData, // Legacy support
           size: file.size,
           pageCount,
           uploadedAt: new Date()

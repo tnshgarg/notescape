@@ -41,7 +41,7 @@ const WorkspaceSidebar = ({
   onProcessChapters,
   onCollapse
 }: WorkspaceSidebarProps) => {
-  const [activeTab, setActiveTab] = useState<'files' | 'chapters'>('files');
+  const [activeTab, setActiveTab] = useState<'files' | 'chapters'>('chapters');
 
   const getFileIcon = (type: string) => {
     switch (type) {
@@ -114,19 +114,20 @@ const WorkspaceSidebar = ({
       <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as 'files' | 'chapters')} className="flex-1 flex flex-col min-h-0">
         <TabsList className="grid w-full grid-cols-2 mx-0 rounded-none border-b bg-transparent h-10">
           <TabsTrigger 
-            value="files" 
-            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
-          >
-            <FileText className="h-4 w-4 mr-2" />
-            Files
-          </TabsTrigger>
-          <TabsTrigger 
             value="chapters"
             className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
           >
             <BookOpen className="h-4 w-4 mr-2" />
             Chapters
           </TabsTrigger>
+          <TabsTrigger 
+            value="files" 
+            className="rounded-none border-b-2 border-transparent data-[state=active]:border-primary data-[state=active]:bg-transparent"
+          >
+            <FileText className="h-4 w-4 mr-2" />
+            Files
+          </TabsTrigger>
+          
         </TabsList>
 
         {/* Files Tab */}

@@ -61,6 +61,7 @@ const LandingPage = () => {
               <Button variant="outline" size="lg" className="h-12 px-8 text-base gap-2">
                 <Play className="h-4 w-4" /> Watch Demo
               </Button>
+              
             </div>
           </div>
         </section>

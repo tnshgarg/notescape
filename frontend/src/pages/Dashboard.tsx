@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 import { 
@@ -20,6 +20,7 @@ import LevelProgress from '@/components/LevelProgress';
 import FlashcardModal from '@/components/FlashcardModal';
 import { useNotebooks } from '@/hooks/useNotebook';
 import { deleteNotebook } from '@/lib/notebookApi';
+import { getDueFlashcards } from '@/lib/flashcardApi';
 import { formatDistanceToNow, startOfWeek, isWithinInterval, subDays } from 'date-fns';
 
 // Helper to check if a notebook has any generated notes
@@ -157,8 +158,31 @@ const Dashboard = () => {
     };
   }, [notebooks]);
 
-  // Generate flashcards from notebooks that have Socrates notes
+  // Fetch backend flashcards
+  const [backendFlashcards, setBackendFlashcards] = useState<any[]>([]);
+  
+  useEffect(() => {
+    const fetchFlashcards = async () => {
+      if (user?.id) {
+        try {
+          const { flashcards } = await getDueFlashcards(user.id);
+          setBackendFlashcards(flashcards);
+        } catch (error) {
+          console.error('Failed to fetch flashcards:', error);
+        }
+      }
+    };
+    fetchFlashcards();
+  }, [user?.id]);
+
+  // Combine backend flashcards with client-side generated ones
   const flashcards = useMemo(() => {
+    // If we have backend flashcards, prioritize them
+    if (backendFlashcards.length > 0) {
+      return backendFlashcards;
+    }
+
+    // Fallback to client-side generation
     const cards: { id: string; front: string; back: string }[] = [];
     
     notebooks.forEach(notebook => {
@@ -207,7 +231,7 @@ const Dashboard = () => {
     
     // Shuffle and limit
     return cards.sort(() => Math.random() - 0.5).slice(0, 15);
-  }, [notebooks]);
+  }, [notebooks, backendFlashcards]);
 
   return (
     <div className="p-8 max-w-6xl mx-auto">

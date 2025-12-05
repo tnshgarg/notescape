@@ -50,12 +50,16 @@ const notebookRoutes = require('./routes/notebook');
 const filesRoutes = require('./routes/files');
 const statsRoutes = require('./routes/stats');
 const flashcardsRoutes = require('./routes/flashcards');
+const nstRoutes = require('./routes/nst');
+const usersRoutes = require('./routes/users');
 
 app.use('/api/ai', aiRoutes);
 app.use('/api/notebooks', notebookRoutes);
 app.use('/api/files', filesRoutes);
 app.use('/api/stats', statsRoutes);
 app.use('/api/flashcards', flashcardsRoutes);
+app.use('/api/nst', nstRoutes);
+app.use('/api/users', usersRoutes);
 
 // Routes Placeholder
 app.get('/', (req, res) => {

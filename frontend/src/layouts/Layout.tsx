@@ -1,11 +1,12 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/clerk-react";
-import { LayoutDashboard, Library, Store, BookOpen, Settings } from 'lucide-react';
+import { SignedIn, SignedOut, SignInButton, UserButton, useUser } from "@clerk/clerk-react";
+import { LayoutDashboard, Library, Store, BookOpen, Settings, GraduationCap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { isNstUser } from '@/lib/nstApi';
 
 const NavItem = ({ to, icon: Icon, children }: { to: string; icon: React.ComponentType<{ className?: string }>; children: React.ReactNode }) => {
   const location = useLocation();
-  const isActive = location.pathname === to || (to === '/dashboard' && location.pathname === '/dashboard');
+  const isActive = location.pathname === to || location.pathname.startsWith(to + '/');
 
   return (
     <Link
@@ -24,6 +25,9 @@ const NavItem = ({ to, icon: Icon, children }: { to: string; icon: React.Compone
 };
 
 const Layout = () => {
+  const { user } = useUser();
+  const showNstTab = isNstUser(user?.primaryEmailAddress?.emailAddress);
+
   return (
     <div className="flex h-screen bg-background">
       {/* Sidebar */}
@@ -41,6 +45,14 @@ const Layout = () => {
           <NavItem to="/dashboard" icon={LayoutDashboard}>Dashboard</NavItem>
           <NavItem to="/library" icon={Library}>My Library</NavItem>
           <NavItem to="/marketplace" icon={Store}>Marketplace</NavItem>
+          
+          {/* NST Learning Tab - Conditional */}
+          {showNstTab && (
+            <>
+              <div className="my-3 border-t" />
+              <NavItem to="/nst" icon={GraduationCap}>NST Learning</NavItem>
+            </>
+          )}
         </nav>
 
         {/* Footer */}
